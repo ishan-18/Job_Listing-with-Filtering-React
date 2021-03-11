@@ -3,6 +3,7 @@ import { JobComp } from "./components/JobComp";
 import data from './assets/API/data.json'
 
 
+
 function App() {
 
   const [job, setJob] = useState([]);
@@ -25,7 +26,7 @@ function App() {
       return true
     }
 
-    return tags.some(tag => filters.includes(tag))
+    return filters.every(filter => tags.includes(filter))
   }
 
   const handleTagClick = (tag) => {
@@ -50,9 +51,9 @@ function App() {
         <img src="/images/bg-header-desktop.svg" className="w-full" alt="bg-img" />
       </header>
       {
-        filters.length > 0 ? <div className="flex flex-col bg-white shadow-md my-16 mx-auto p-6 rounded sm:flex-row cursor-pointer" style={{width: "80%"}}>
+        filters.length > 0 ? <div className="flex z-10 relative flex-wrap bg-white shadow-md -my-20 mb-16 mx-auto p-6 rounded lg:flex-row cursor-pointer" style={{width: "80%"}}>
         {
-          filters.length > 0 && filters.map((filter) => <span onClick={()=>handleFilterClick(filter)}><span className="color-teal1 cursor-pointer font-bold m-3 p-2 rounded rounded-r-none sm:mb-0 text-sm">{filter}</span><span className="cursor-pointer font-bold -ml-3 p-2 rounded rounded-l-none sm:mb-0 text-sm" style={{backgroundColor: "hsl(180, 29%, 50%)", color: "hsl(180, 52%, 96%)"}}>X</span></span>)
+          filters.length > 0 && filters.map((filter) => <span onClick={()=>handleFilterClick(filter)} className="flex flex-"><span className="color-teal1 cursor-pointer font-bold m-3 p-2 rounded rounded-r-none lg:mb-0 text-sm">{filter} &nbsp;X</span></span>)
         }
         <button className="font-bold ml-auto border-0 outline-none bg-transparent" onClick={clearFilters}>Clear</button> 
       </div> : ""
